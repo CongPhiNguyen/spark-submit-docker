@@ -1,0 +1,20 @@
+version: "3.3"
+services:
+  spark:
+    container_name: spark-container
+    build: .
+    stdin_open: true
+    tty: true
+    volumes:
+      - type: bind
+        source: ./submit
+        target: /submit
+      - type: bind
+        source: ./jars
+        target: /opt/bitnami/spark/jars/
+      - type: bind
+        source: ./log4j2.properties.template
+        target: /opt/bitnami/spark/conf/log4j2.properties
+    ports:
+      - "7077:7077"
+      - "8080:8080"
